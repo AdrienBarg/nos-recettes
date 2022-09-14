@@ -1,11 +1,13 @@
 import './navbar.scss';
 import { mainMenu } from "../../constants"
+import logoChef from '../../assets/logoChef.svg'
 
 
 const Navbar = () => (
     <nav className="mainNav">
-        <div className="">
-            <img src="" alt="logo" />
+        <div className="logoWrapper">
+            <img src={logoChef} alt="logo" />
+            <h1>Nos-recettes.fr</h1>
         </div>
         <div className="mainMenu">
             <ul className="">
@@ -16,6 +18,9 @@ const Navbar = () => (
                         </li>
                     ))
                 }
+                <li className='login'>
+                    <a href="">Se connecter</a>
+                </li>
             </ul>
         </div>
     </nav>
