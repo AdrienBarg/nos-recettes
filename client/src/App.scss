@@ -1,12 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 
+$primary-color: #d33c3c;
+
 :root {
     font-family: Poppins, Verdana, Tahoma, sans-serif;
-    
+    --primary-color: #d33c3c;
+    --primary-filter: invert(24%) sepia(50%) saturate(2400%) hue-rotate(335deg) brightness(114%) contrast(89%);
+    --secondary-color: white;
+    --secondary-filter: invert(100%);
+    --white-filter: invert(100%);
 }
 
 body {
     margin: 0;
     background-color: #f0f0f0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
 }

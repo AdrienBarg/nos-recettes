@@ -3,9 +3,65 @@
     .contentWrapper {
         height: 90%;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: start;
         align-items: center;
-        .carte {
+        gap: 20%;
+        background-color: rgba(black, 0.8);
+        position: relative;
+        &::before {
+            background-image: url('../../assets/heroBg.jpg');
+            background-position: center;
+            background-size: cover;
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            opacity: 0.55;
+        }
+
+        .logoContainer {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary-color);
+            top: 10%;
+            margin-bottom: 50px;
+            padding: 10px;
+            img {
+                max-width: 150px;
+                filter: var(--secondary-filter);
+            }
+            h1 {
+                border-bottom: 2px solid var(--primary-color);
+                text-shadow: 3px 3px 10px black;
+            }
+        }
+        .cta {
+            position: relative;
+
+            a {
+                padding: 10px;
+                margin: 10px;
+                color: var(--primary-color);
+                border: 1px solid var(--primary-color);
+                background-color: var(--secondary-color);
+                font-weight: 600;
+                transition: 200ms;
+                transition-timing-function: ease;
+                &:hover {
+                    color: var(--secondary-color);
+                    border: 1px solid var(--secondary-color);
+                    background-color: var(--primary-color);
+                }
+            }
+
+        }
+        /*.carte {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,49 +73,28 @@
                 flex: 1 1 0px;
                 padding: 100px;
                 width: 100%;
+                position: relative;
             }
 
             .leftContainer {
-                //border-right: 1px dotted black;
-                position: relative;
-                background-color: rgba(black, 0.85);
-
+                
                 div {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    &::before {
-                        content: "";
-                        background-image: url(../../assets/heroPic1.jpg);
-                        background-position: center;
-                        background-size: cover;
-                        position: absolute;
-                        top: 0px;
-                        right: 0px;
-                        bottom: 0px;
-                        left: 0px;
-                        opacity: 0.45;
-                        
-                    }
                 }
                 img {
-                    position: relative;
                     width: 150px;
                     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(100%);
-                    
                 }
                 h1 {
-                    position: relative;
                     padding: 5px;
-                    
-                    color: white;
-                    
+                    color: white;     
                 }
             }
     
             .rightContainer {
-                
                 h2 {
                     margin-bottom: 30px;
                 }
@@ -74,7 +109,7 @@
                     color: black;
                 }
             }
-        }
+        }*/
         //gap: 20%;
 
         
