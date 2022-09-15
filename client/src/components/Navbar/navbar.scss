@@ -12,14 +12,16 @@
 
     .logoWrapper {
         margin-left: 10%;
-        display: flex;
-        align-items: center;
-        margin: 10px 0 10px 10%;
-        //color: white;
-
-        img {
-            width: 60px;
-            filter: invert(24%) sepia(50%) saturate(2400%) hue-rotate(335deg) brightness(114%) contrast(89%);
+        a {
+            display: flex;
+            align-items: center;
+            margin: 10px 0 10px 10%;
+            color: var(--primary-color);
+            white-space: nowrap;
+            img {
+                width: 10%;
+                filter: invert(24%) sepia(50%) saturate(2400%) hue-rotate(335deg) brightness(114%) contrast(89%);
+            }
         }
     }
     .mainMenu {
@@ -28,23 +30,31 @@
         ul {
             display: flex;
             flex-direction: row;
+            align-items: center;
+
+            a {
+                font-size: medium;
+                font-weight: 600;
+                white-space: nowrap;
+                color: var(--primary-color);
+            }
 
             li {
                 margin-right: 30px;
-
-                a {
-                    font-size: medium;
-                    font-weight: 600;
-                    white-space: nowrap;
-                    color: var(--primary-color);
+                transition: all ease-in-out .2s;
+                &:hover {
+                    box-shadow: 0px 2px 0px 0px var(--primary-color);
                 }
             }
-            li.login {
+            li.auth {
                 border: 1px solid var(--primary-color);
                 border-radius: 5px;
-    
-                a {
-                    padding: 10px;
+                padding: 1px 8px;
+
+                &:hover {
+                    background-color: var(--primary-color);
+                    color: var(--secondary-color);
+                    box-shadow: none;
                 }
             }
         }

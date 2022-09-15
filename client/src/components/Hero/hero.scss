@@ -65,7 +65,7 @@
 
         }
         .auth {
-            background-color: rgba(var(--secondary-color-rgb), 0.7);
+            background-color: rgba(var(--secondary-color-rgb), 0.8);
             border: 1px solid var(--primary-color);
             display: flex;
             flex-direction: column;
@@ -76,7 +76,7 @@
                 text-shadow: 1px 1px 5px white;
             }
             form {
-                margin: 30px 50px 50px 50px;
+                margin: 30px 50px 20px 50px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -101,80 +101,15 @@
                     }
                 }
             }
+            p {
+                margin: 0;
+            }
+            a {
+                margin-bottom: 20px;
+                color: var(--primary-color);
+                text-shadow: 1px 1px 5px white;
+                font-weight: 600;
+            }
         }
-        /*.carte {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50%;
-            //border: 1px solid black;
-            //border-radius: 10px;
-            
-            & > div {
-                flex: 1 1 0px;
-                padding: 100px;
-                width: 100%;
-                position: relative;
-            }
-
-            .leftContainer {
-                
-                div {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                }
-                img {
-                    width: 150px;
-                    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(100%);
-                }
-                h1 {
-                    padding: 5px;
-                    color: white;     
-                }
-            }
-    
-            .rightContainer {
-                h2 {
-                    margin-bottom: 30px;
-                }
-                p {
-                    margin-left: 20px;
-                    margin-top: 20px;
-                    padding: 5px;
-                    padding-left: 10px;
-                    box-shadow: 2px 2px 5px black;
-                    background-color: #f0f0f0;
-                    border-radius: 10px;
-                    color: black;
-                }
-            }
-        }*/
-        //gap: 20%;
-
-        
-
-        /*.imgWrapper {
-            display: flex;
-            .imgContainer {
-                position: relative;
-
-                &:first-child {
-                    transform: rotate(-6deg);
-                    left: 50px;
-                    top: 20px;
-                }
-                &:nth-child(2) {
-                    transform: rotate(4deg);
-                    right: 50px;
-                }
-
-                img {
-                    max-width: 300px;
-                }
-            }
-        }*/
     }
-
 }

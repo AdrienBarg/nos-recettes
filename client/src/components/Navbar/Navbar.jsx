@@ -1,4 +1,5 @@
 import './navbar.scss';
+import {Link} from "react-router-dom"
 import { mainMenu } from "../../constants"
 import logoChef from '../../assets/logoChef.svg'
 
@@ -6,21 +7,33 @@ import logoChef from '../../assets/logoChef.svg'
 const Navbar = () => (
     <nav className="mainNav">
         <div className="logoWrapper">
-            <img src={logoChef} alt="logo" />
-            <h1>Nos-recettes.fr</h1>
+            <Link to = "/" >
+                <img src={logoChef} alt="logo" />
+                <h1>Nos-recettes.fr</h1>
+            </Link>
         </div>
         <div className="mainMenu">
             <ul className="">
-                {
-                    mainMenu.map((nav, index) => (
-                        <li key={nav.id} className="">
-                            <a href="">{nav.title}</a>
-                        </li>
-                    ))
-                }
-                <li className='login'>
-                    <a href="">Se connecter</a>
-                </li>
+                <Link to = "/search" >
+                    <li>
+                        Rechercher
+                    </li>
+                </Link>
+                <Link to = "/ccm" >
+                    <li>
+                        Comment ça marche ?
+                    </li>
+                </Link>
+                <Link to = "/home/login">
+                    <li className='auth'>
+                        Se connecter
+                    </li>
+                </Link>
+                <Link to = "/home/register">
+                    <li className='auth'>
+                        S'inscrire
+                    </li>
+                </Link>
             </ul>
         </div>
     </nav>
