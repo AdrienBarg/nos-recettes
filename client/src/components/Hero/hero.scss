@@ -4,9 +4,10 @@
         height: 90%;
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: space-around;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 10%;
+        //gap: 2%;
         background-color: rgba(black, 0.8);
         position: relative;
         &::before {
@@ -27,14 +28,13 @@
         }
 
         .logoContainer {
-            
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: var(--secondary-color);
             top: 10%;
-            margin-bottom: 50px;
+            //margin-bottom: 50px;
             padding: 10px;
             img {
                 max-width: 150px;
@@ -46,7 +46,7 @@
             }
         }
         .cta {
-            margin-top: 10%;
+            //margin-top: 10%;
             a {
                 padding: 10px;
                 margin: 10px;
@@ -70,6 +70,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 10%;
             h2 {
                 margin-bottom: 0;
                 color: var(--primary-color);

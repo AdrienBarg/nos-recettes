@@ -26,10 +26,7 @@ const Hero = () => {
         <div className="mainHero">
             <Navbar />
             <div className="contentWrapper">
-                <div className='logoContainer'>
-                    <img src={logo} alt="" />
-                    <h1>Nos-recettes.fr</h1>
-                </div>
+                
                 <div>
                     {context === 'login' ? (
                         <div className="auth">
@@ -60,7 +57,13 @@ const Hero = () => {
                             <Link to="/home/login">Connectez-vous ici</Link>
                         </div>
                     ) : (
-                        <div className="cta">
+                        <div className='logoContainer'>
+                    <img src={logo} alt="" />
+                    <h1>Nos-recettes.fr</h1>
+                </div>
+                    )}
+                </div>
+                <div className="cta">
                             <a href="">
                                 Rechercher
                             </a>
@@ -74,8 +77,6 @@ const Hero = () => {
                                 S'inscrire
                             </Link>
                         </div>
-                    )}
-                </div>
             </div>
         </div>
     )
