@@ -16,11 +16,11 @@
             display: flex;
             align-items: center;
             margin: 10px 0 10px 10%;
-            color: var(--primary-color);
+            color: var(--tertiary-color);
             white-space: nowrap;
             img {
                 width: 10%;
-                filter: invert(24%) sepia(50%) saturate(2400%) hue-rotate(335deg) brightness(114%) contrast(89%);
+                filter: var(--primary-filter);
             }
         }
     }
@@ -36,10 +36,11 @@
                 font-size: medium;
                 font-weight: 600;
                 white-space: nowrap;
-                color: var(--primary-color);
+                
             }
 
             li {
+                color: var(--tertiary-color);
                 margin-right: 30px;
                 transition: all ease-in-out .2s;
                 &:hover {
@@ -47,6 +48,7 @@
                 }
             }
             li.auth {
+                color: var(--primary-color);
                 border: 1px solid var(--primary-color);
                 border-radius: 5px;
                 padding: 1px 8px;

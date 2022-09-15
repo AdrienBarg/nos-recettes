@@ -5,12 +5,19 @@ $primary-color: #d33c3c;
 
 :root {
     font-family: Poppins, Verdana, Tahoma, sans-serif;
+
     --primary-color: #d33c3c;
     --primary-color-rgb: 211, 60, 60;
     --primary-filter: invert(24%) sepia(50%) saturate(2400%) hue-rotate(335deg) brightness(114%) contrast(89%);
+    
     --secondary-color: white;
     --secondary-color-rgb: 255, 255, 255;
     --secondary-filter: invert(100%);
+    
+    --tertiary-color: darkcyan;
+    --tertiary-color-rgb: 0, 139, 139;
+    --tertiary-filter: invert(30%) sepia(87%) saturate(1412%) hue-rotate(153deg) brightness(96%) contrast(104%);
+    
     --white-filter: invert(100%);
     --dimWhite: #e2e2e2;
 }

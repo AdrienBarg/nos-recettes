@@ -26,10 +26,9 @@ const Hero = () => {
         <div className="mainHero">
             <Navbar />
             <div className="contentWrapper">
-                
                 <div>
                     {context === 'login' ? (
-                        <div className="auth">
+                        <div className="authWrapper">
                             <h2>Se connecter</h2>
                             <form action="">
                                 <input type="email" placeholder='Adresse email' required />
@@ -43,7 +42,7 @@ const Hero = () => {
 
                         </div>
                     ) : context === 'register' ? (
-                        <div className="auth">
+                        <div className="authWrapper">
                             <h2>S'inscrire</h2>
                             <form action="">
                                 <input type="email" placeholder='Adresse email' required />
@@ -58,25 +57,25 @@ const Hero = () => {
                         </div>
                     ) : (
                         <div className='logoContainer'>
-                    <img src={logo} alt="" />
-                    <h1>Nos-recettes.fr</h1>
-                </div>
+                            <img src={logo} alt="" />
+                            <h1>Nos-recettes.fr</h1>
+                        </div>
                     )}
                 </div>
                 <div className="cta">
-                            <a href="">
-                                Rechercher
-                            </a>
-                            <a href="">
-                                Comment ça marche ?
-                            </a>
-                            <Link to="/home/login" >
-                                Se connecter
-                            </Link>
-                            <Link to="/home/register" >
-                                S'inscrire
-                            </Link>
-                        </div>
+                    <Link to="/search" >
+                        Rechercher
+                    </Link>
+                    <Link to="/ccm" >
+                        Comment ça marche ?
+                    </Link>
+                    <Link to="/home/login" className='auth'>
+                        Se connecter
+                    </Link>
+                    <Link to="/home/register" className='auth'>
+                        S'inscrire
+                    </Link>
+                </div>
             </div>
         </div>
     )
