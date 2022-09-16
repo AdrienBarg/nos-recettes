@@ -3,7 +3,7 @@ import { logo, heroPic1, heroPic2 } from '../../assets';
 import Navbar from '../Navbar/Navbar';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Login, Register } from '../../features/Auth';
+import { Login, Register } from '../Auth';
 
 
 const Hero = () => {
