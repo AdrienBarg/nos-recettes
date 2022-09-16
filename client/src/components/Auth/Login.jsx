@@ -19,6 +19,14 @@ const Login = () => {
     });
 
     const data = await response.json();
+
+    if (data.user) {
+      alert('Login successful');
+      window.location.href = '/dashboard';
+    } else {
+      alert('Please check your username and password');
+    }
+    
     console.log(data);
   }
 

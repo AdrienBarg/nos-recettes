@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 const Register = () => {
-
+    const history = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,7 +11,7 @@ const Register = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:1337/api/register', {
+        const response = await fetch('http://localhost:1337/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,10 @@ const Register = () => {
         });
     
         const data = await response.json();
-        console.log(data);
+        
+        if(data.status === "ok") {
+            history.push('/login')
+        }
       }
 
     return (

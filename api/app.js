@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require ('mongoose');
+const jwt = require('jsonwebtoken');
 
 const User = require('./models/user.model')
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json())
 
 const uri = process.env.MONGO_URI;
+const jwtSec = process.env.JWT_SEC_KEY;
 mongoose.connect(uri)
 
 app.post('/api/register', async (req, res) => {
@@ -32,12 +34,16 @@ app.post('/api/login', async (req, res) => {
         password: req.body.password,
     });
     if(user) {
+
+        const token = jwt.sign({
+            name: user.name,
+            email: user.email
+        }, jwtSec)
+
         return res.json({ status: 'ok', user: true})
     } else {
         return res.json({ status: 'error', user: false})
     }
-
-    res.json({ satus: 'ok' });
 });
 
 app.listen(1337, () => {
