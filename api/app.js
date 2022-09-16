@@ -1,51 +1,53 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const mongoose = require ('mongoose');
-const jwt = require('jsonwebtoken');
-
-const User = require('./models/user.model')
-
 const app = express();
+const path = require('path');
+const { logger, logEvents } = require('./middleware/logger');
+const errorHandler = require('./middleware/errorHandler');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
+const connectDB = require('./config/dbConn');
+const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3500;
 
-app.use(cors());
-app.use(express.json())
+connectDB();
 
-const uri = process.env.MONGO_URI;
-const jwtSec = process.env.JWT_SEC_KEY;
-mongoose.connect(uri)
+app.use(logger);
 
-app.post('/api/register', async (req, res) => {
-    try {
-        const user = await User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-        })
-        res.json({ satus: 'ok' });
-    } catch (error) {
-        res.json({ satus: 'error', error: 'whatever error duplicate' });
-    }
-});
+app.use(cors(corsOptions));
 
-app.post('/api/login', async (req, res) => {
-    const user = await User.findOne({
-        email: req.body.email,
-        password: req.body.password,
-    });
-    if(user) {
+app.use(express.json());
 
-        const token = jwt.sign({
-            name: user.name,
-            email: user.email
-        }, jwtSec)
+app.use(cookieParser());
 
-        return res.json({ status: 'ok', user: true})
+/*app.use('/', express.static(path.join(__dirname, '/public')))
+
+app.use('/', require('./routes/root'))*/
+app.use('/users', require('./routes/userRoutes'))
+
+/*app.all('*', (req, res) => {
+    res.status(404)
+    if (req.accepts('html')) {
+        res.sendFile(path.join(__dirname, 'views', '404.html'))
+    } else if (req.accepts('json')) {
+        res.json({ message: '404 Not Found' })
     } else {
-        return res.json({ status: 'error', user: false})
+        res.type('txt').send('404 Not Found')
     }
+})*/
+
+app.use(errorHandler)
+
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () =>  {
+        console.log(`Server running on port ${PORT}`);
+    });
 });
 
-app.listen(1337, () => {
-    console.log('Server started on 1337')
+mongoose.connection.on('error', err => {
+    console.log(err);
+    logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log');
 });
+

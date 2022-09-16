@@ -1,10 +1,9 @@
 import './hero.scss';
 import { logo, heroPic1, heroPic2 } from '../../assets';
 import Navbar from '../Navbar/Navbar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { Login, Register } from '../Auth';
+import { Login, Register } from '../../features/Auth';
 
 
 const Hero = () => {
