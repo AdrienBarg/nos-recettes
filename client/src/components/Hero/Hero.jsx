@@ -4,6 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Login, Register } from '../Auth';
+//import Register  from '../../features/Register'
 
 
 const Hero = () => {
