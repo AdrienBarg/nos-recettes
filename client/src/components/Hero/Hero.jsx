@@ -3,8 +3,9 @@ import { logo, heroPic1, heroPic2 } from '../../assets';
 import Navbar from '../Navbar/Navbar';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Login, Register } from '../Auth';
-//import Register  from '../../features/Register'
+//import { Login } from '../Auth';
+import { Register, Login }  from '../../features/Auth'
+
 
 
 const Hero = () => {
