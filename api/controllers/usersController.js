@@ -3,6 +3,8 @@ const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 
+
+
 // @desc - Get all users
 // @route - GET /users
 // @access - Private
@@ -16,7 +18,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 // @desc - Create new user
 // @route - POST /users
-// @access - Private
+// @access - Public
 const createNewUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -26,13 +28,13 @@ const createNewUser = asyncHandler(async (req, res) => {
     }
 
     // Check for duplicates
-    const duplicateName = await User.findOne({ username }).lean().exec();
+    const duplicateName = await User.findOne({ 'username': {'$regex': username, '$options': 'i'}}).lean().exec();
     const duplicateEmail = await User.findOne({ email }).lean().exec();
     if (duplicateName) {
-        return res.status(409).json({ message: 'Duplicate username' })
+        return res.status(409).json({ message: 'Ce pseudo est déjà utilisé.' })
     } 
     if (duplicateEmail) {
-        return res.status(409).json({ message: 'Duplicate email' })
+        return res.status(409).json({ message: 'Cet email est déjà enregistré.' })
     }
 
     // Hash password
@@ -43,7 +45,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     // Create and store new user
     const user = await User.create(userObject)
     if (user) {
-        res.status(201).json({ message: `New user ${username} created.` })
+        res.status(201).json({ message: `New user "${username}" created.` })
     } else {
         res.status(400).json({ message: 'Invalid data received.' })
     }
@@ -66,17 +68,16 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 
     // Check for duplicate
-    const duplicateID = await User.findOne({ username }).lean().exec();
+    const duplicateName = await User.findOne({ 'username': {'$regex': username, '$options': 'i'} }).lean().exec();
     const duplicateEmail = await User.findOne({ email }).lean().exec();
         //allow updates to the original user
-    if(duplicateID && duplicateID?._id.toString() !== id) {
+    if(duplicateName && duplicateName?._id.toString() !== id) {
         return res.status(409).json({ message: 'Duplicate username' })
     }
     if(duplicateEmail && duplicateEmail?._id.toString() !== id) {
         return res.status(409).json({ message: 'Duplicate email' })
     }
     
-
     user.username = username;
     user.email = email;
     user.active = active;
@@ -87,7 +88,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     const updatedUser = await user.save();
 
-    res.json({ message: `${updatedUser.username} updated` });
+    res.json({ message: `Le profil ${updatedUser.username} a été mis à jour` });
 
 });
 
@@ -107,7 +108,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 
     const result = await user.deleteOne();
-    const reply = `Username ${result.username} with ID ${result._id} deleted`;
+    const reply = `User ${result.username} with ID ${result._id} deleted`;
 
     res.json(reply);
 });

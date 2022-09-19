@@ -32,6 +32,9 @@ const recipeSchema = new mongoose.Schema({
         required: true,
         ref: 'Ingredient'
     }],
+    ingredientsCustom: [{
+        type: String,
+    }],
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

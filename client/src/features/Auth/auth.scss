@@ -7,6 +7,11 @@
     margin-top: 10%;
     width: 400px;
 
+    &.login form{
+        gap: 20px;
+        margin-top: 40px;
+    }
+
     .welcome {
         display: flex;
         flex-direction: column;
