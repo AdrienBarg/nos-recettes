@@ -1,5 +1,4 @@
 import './auth.scss'
-
 import { useState, useRef, useEffect, createRef } from 'react'
 import { faCheck, faTimes, faInfoCircle, faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

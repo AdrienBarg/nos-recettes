@@ -26,6 +26,10 @@ const bookSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'User' 
     }],
+    status: {
+        type: String,
+        default: 'Private'
+    },
     active: {
         type: Boolean,
         default: true

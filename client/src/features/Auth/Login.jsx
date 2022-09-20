@@ -1,23 +1,31 @@
-import { useState, useRef, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/AuthProvider';
+import './auth.scss';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
+
 const LOGIN_URL ='/auth';
 
 import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
-  const userRef = useRef();
-  const errRef = useRef();
+  const { setAuth } = useAuth()
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
+
+  const userRef = useRef()
+  const errRef = useRef()
   
-  const [email, setEmail] = useState('');
-  const [pwd, setPwd] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
+  const [errMsg, setErrMsg] = useState('')
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    setErrMsg('')
 
     try {
       const response = await axios.post(
@@ -28,68 +36,78 @@ const Login = () => {
           withCredentials: true
         }
       );
-      console.log(JSON.stringify(respose?.data));
-      console.log(JSON.stringify(respose));
       const accessToken = response?.data?.accessToken;
-      const user = response?.data?.user;
+      const username = response?.data?.username;
+      console.log(response.data)
       //const roles = response?.data?.roles;
       //setAuth({ user, email, pwd, roles, accessToken })
-      setAuth({ user, email, pwd, accessToken });
+      setAuth({ username, email, pwd, accessToken });
       setEmail('');
       setPwd('');
-      setSuccess(true);
+      console.log(from)
+      navigate(from, {replace: true})
 
     } catch (err) {
-      if(!err?.response) {
+      if(err && !err?.response) {
         setErrMsg('Le serveur ne répond pas.');
       } else if (err.response?.status === 400) {
         setErrMsg('Adresse email ou mot de passe invalide.')
       } else if (err.response?.status === 401) {
-        setErrMsg('Non autorisé.');
+        setErrMsg(err.response.data.message);
+        console.log(err.response.data.message)
       } else {
         setErrMsg('Login Failed');
       }
-      errRef.current.focus();
     }
 
   };
 
-
+  // set focus to email  field
   useEffect(() => {
     userRef.current.focus();
   }, []);
 
   return (
     <section className="authWrapper login">
-      <h2>Se connecter</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <FontAwesomeIcon icon={faEnvelope} className="icon"/>
-          <input
-              value={email}
-              ref={userRef}
-              onChange={(e) => setEmail(e.target.value)} 
-              type="email" 
-              placeholder='Adresse email' 
-              required 
-          />
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faLock} className="icon"/>
-          <input 
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)} 
-              type="password" 
-              placeholder='Mot de passe' 
-              required 
-          />
-        </div>
-        <div>
-          <input className='submit' type="submit" value="Se connecter" />
-        </div>
-      </form>
-      <span>Vous n'avez pas encore de compte ?</span>
-      <Link to="/home/register">Inscrivez vous ici</Link>
+        <h2>Se connecter</h2>
+        <form onSubmit={handleLogin}>
+          <label htmlFor="email" className={email !== '' ? "visible" : "hidden" }>
+            Adresse email :
+          </label>
+          <div>
+            <FontAwesomeIcon icon={faEnvelope} className="icon"/>
+            <input
+                type="email"
+                id="email" 
+                placeholder='Adresse email'
+                value={email}
+                ref={userRef}
+                onChange={(e) => setEmail(e.target.value)} 
+                autoComplete='on' 
+                required 
+            />
+          </div>
+          <label htmlFor="password" className={pwd !== '' ? "visible" : "hidden" }>
+            Mot de passe :
+          </label>
+          <div>
+            <FontAwesomeIcon icon={faLock} className="icon"/>
+            <input 
+                id="password"
+                type="password" 
+                placeholder='Mot de passe' 
+                required 
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)} 
+            />
+          </div>
+          <div>
+            <input className='submit' type="submit" value="Se connecter" />
+          </div>
+          <span className='errMsg'>{errMsg}</span>
+        </form>
+        <span>Vous n'avez pas encore de compte ?</span>
+        <Link to="/home/register">Inscrivez vous ici</Link> 
     </section>
   )
 }

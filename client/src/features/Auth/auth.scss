@@ -7,9 +7,8 @@
     margin-top: 10%;
     width: 400px;
 
-    &.login form{
-        gap: 20px;
-        margin-top: 40px;
+    .errMsg {
+        color: var(--danger-color)
     }
 
     .welcome {
@@ -39,6 +38,16 @@
         text-shadow: 1px 1px 5px white;
     }
 
+    &.login form{
+        gap: 2px;
+        margin-top: 40px;
+
+        input#password {
+            margin-bottom: 20px;
+        }
+        
+    }
+
     form {
         margin: 0px 50px 20px 50px;
         display: flex;
@@ -65,7 +74,7 @@
             &.submit {
                 margin-top: 20px;
                 cursor: pointer;
-                color: var(--primary-color);
+                //color: var(--primary-color);
                 &:hover {
                     background-color: var(--primary-color);
                     color: var(--secondary-color);

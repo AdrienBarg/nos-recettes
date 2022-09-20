@@ -10,24 +10,25 @@ const login = asyncHandler(async(req, res) => {
 
     const { email, password } = req.body;
     if(!email || !password) {
-        return res.status(400).json({ message: 'Adresse email et mot de passe requis.' })
+        return res.status(400).json({ message: 'Email et mot de passe requis.' })
     }
 
     const foundUser = await User.findOne({ email }).exec()
     if(!foundUser || !foundUser.active) {
-        return res.status(401).json({ message: 'Adresse email ou mot de passe incorrect.' })
+        return res.status(401).json({ message: 'Email ou mot de passe incorrect.' })
     }
+    const username = foundUser.username
 
     const match = await bcrypt.compare(password, foundUser.password)
     if(!match) {
-        return res.status(401).json({ message: 'Adresse email ou mot de passe incorrect.' })
+        return res.status(401).json({ message: 'Email ou mot de passe incorrect.' })
     }
 
     const accessToken = jwt.sign(
         {
             "UserInfo" : {
                 "username": foundUser.username,
-                //"roles": foundUser.roles
+                "roles": foundUser.roles
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -37,7 +38,7 @@ const login = asyncHandler(async(req, res) => {
     const refreshToken = jwt.sign(
         { "username": foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '10m' }
     );
 
     // Create secure cookie with refresh token
@@ -49,7 +50,7 @@ const login = asyncHandler(async(req, res) => {
     });
 
     // Send accesToken containing username and roles
-    res.json({ accessToken })
+    res.json({ accessToken, username })
 
 });
 
@@ -76,11 +77,11 @@ const refresh = (req, res) => {
                 {
                     "UserInfo" : {
                         "username": foundUser.username,
-                        //"roles": foundUser.roles
+                        "roles": foundUser.roles
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '1d' }
+                { expiresIn: '10m' }
             );
 
             res.json({ accessToken });

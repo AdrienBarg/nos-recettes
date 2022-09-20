@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 //import { Login } from '../Auth';
 import { Register, Login }  from '../../features/Auth'
+import Unauthorized from '../Unauthorized/Unauthorized';
 
 
 
@@ -19,6 +20,8 @@ const Hero = () => {
             setContext('login');
         } else if ( modale === 'register' ) {
             setContext('register')
+        } else if ( modale === 'unauthorized' ) {
+            setContext('unauthorized')
         } else {
             setContext('')
         }
@@ -33,6 +36,8 @@ const Hero = () => {
                         <Login />
                     ) : context === 'register' ? (
                         <Register />
+                    ) : context === 'unauthorized' ? (
+                        <Unauthorized />
                     ) : (
                         <div className='logoContainer'>
                             <img src={logo} alt="" />

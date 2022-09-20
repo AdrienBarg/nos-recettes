@@ -5,6 +5,9 @@ const measureSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    alt: {
+        type: String
+    },
     active: {
         type: Boolean,
         default: true

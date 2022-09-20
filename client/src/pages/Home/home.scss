@@ -2,6 +2,79 @@
     max-width: 100%;
     height: 100vh;
     
+    .mainHero {
+        height: 100vh;
+        .contentWrapper {
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-items: center;
+            //gap: 2%;
+            background-color: rgba(black, 0.8);
+            position: relative;
+            &::before {
+                background-image: url('../../assets/heroBg.jpg');
+                background-position: center;
+                background-size: cover;
+                content: "";
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                opacity: 0.55;
+            }
     
-
+            div {
+                position: relative;
+            }
+    
+            .logoContainer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: var(--secondary-color);
+                top: 10%;
+                //margin-bottom: 50px;
+                padding: 10px;
+                img {
+                    max-width: 150px;
+                    filter: var(--secondary-filter);
+                }
+                h1 {
+                    border-bottom: 2px solid var(--primary-color);
+                    text-shadow: 3px 3px 10px black;
+                }
+            }
+            .cta {
+                //margin-top: 10%;
+                a {
+                    padding: 10px;
+                    margin: 10px;
+                    color: var(--tertiary-color);
+                    //border: 2px solid var(--primary-color);
+                    background-color: var(--secondary-color);
+                    font-weight: 600;
+                    transition: 200ms;
+                    transition-timing-function: ease;
+                    &.auth {
+                        color: var(--primary-color);
+                        &:hover {
+                            background-color: var(--primary-color);
+                        }                    
+                    }
+                    &:hover {
+                        color: var(--secondary-color);
+                        //border-left: 2px solid var(--secondary-color);
+                        background-color: var(--tertiary-color);
+                    }
+                }
+    
+            }
+    
+        }
+    }
 }

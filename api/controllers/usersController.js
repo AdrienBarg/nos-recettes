@@ -55,7 +55,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @route - PATCH /users
 // @access - Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, username, email, password, active } = req.body
+    const { id, username, email, password, active, roles } = req.body
 
     // Confirm data
     if (!id || !username || !email || typeof active !== 'boolean') {
@@ -81,6 +81,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.username = username;
     user.email = email;
     user.active = active;
+    if(roles) { user.roles = roles }
     if(password) {
         // Hash password
         user.password = await bcrypt.hash(password, 10) // salt rounds

@@ -15,10 +15,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    roles: [{
-        type: String,
-        default: "Visitor"
-    }],
+    roles: {
+        type: [{
+            role: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Roles'
+            }
+        }],
+        default: [{
+            role: '63287b26daf5faf10ce9a16b'
+        }]
+    },
     active: {
         type: Boolean,
         default: true

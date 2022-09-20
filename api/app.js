@@ -28,6 +28,8 @@ app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/ingredients', require('./routes/ingredientRoutes'))
 app.use('/measures', require('./routes/measureRoutes'))
+app.use('/category', require('./routes/categoryRoutes'))
+app.use('/roles', require('./routes/roleRoutes'))
 
 /*app.all('*', (req, res) => {
     res.status(404)
