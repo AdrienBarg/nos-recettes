@@ -38,10 +38,10 @@ const Login = () => {
       );
       const accessToken = response?.data?.accessToken;
       const username = response?.data?.username;
-      console.log(response.data)
-      //const roles = response?.data?.roles;
+      console.log('data : ' + JSON.stringify(response.data))
+      const roles = response?.data?.roles;
       //setAuth({ user, email, pwd, roles, accessToken })
-      setAuth({ username, email, pwd, accessToken });
+      setAuth({ username, email, roles, accessToken });
       setEmail('');
       setPwd('');
       console.log(from)

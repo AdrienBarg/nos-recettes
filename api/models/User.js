@@ -17,15 +17,20 @@ const userSchema = new mongoose.Schema({
     },
     roles: {
         type: [{
-            role: {
+            id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Roles'
             }
         }],
         default: [{
-            role: '63287b26daf5faf10ce9a16b'
-        }]
+            id: '63287b26daf5faf10ce9a16b'
+        }],
+        _id: false
     },
+    books: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Book'
+    }],
     active: {
         type: Boolean,
         default: true

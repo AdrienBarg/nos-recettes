@@ -18,6 +18,7 @@ const login = asyncHandler(async(req, res) => {
         return res.status(401).json({ message: 'Email ou mot de passe incorrect.' })
     }
     const username = foundUser.username
+    const roles = foundUser.roles
 
     const match = await bcrypt.compare(password, foundUser.password)
     if(!match) {
@@ -38,7 +39,7 @@ const login = asyncHandler(async(req, res) => {
     const refreshToken = jwt.sign(
         { "username": foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '10m' }
+        { expiresIn: '1d' }
     );
 
     // Create secure cookie with refresh token
@@ -50,7 +51,7 @@ const login = asyncHandler(async(req, res) => {
     });
 
     // Send accesToken containing username and roles
-    res.json({ accessToken, username })
+    res.json({ accessToken, username, roles })
 
 });
 

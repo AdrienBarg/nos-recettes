@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-    creator: {
-        type: mongoose.Schema.Types.ObjectId,
+    author: {
+        type: [{
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            name: {
+                type: String
+            }
+        }],
         required: true,
-        ref: 'User'
+        _id: false
     },
     title: {
         type: String,
@@ -17,11 +25,19 @@ const bookSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Recipe'
     }],
-    editors: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }],
+    editors: {
+        type: [{
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            name: {
+                type: String
+            }
+        }],
+        required: true,
+        _id: false
+    },
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:'User' 

@@ -1,0 +1,17 @@
+.dashMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 1400px;
+        background-color: var(--dimWhite);
+    }
+
+    
+}

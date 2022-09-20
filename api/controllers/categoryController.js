@@ -30,9 +30,9 @@ const createNewCategory = asyncHandler(async (req, res) => {
         return res.status(409).json({ message: `La catégorie '${name}' existe déjà. ` })
     }
     
-    const ingObject = { name }
+    const catObject = { name }
     // Create and store new category
-    const category = await Category.create(ingObject)
+    const category = await Category.create(catObject)
     if (category) {
         res.status(201).json({ message : `Nouvelle catégorie '${name}' ajoutée.` })
     } else {
