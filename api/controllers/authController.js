@@ -13,12 +13,15 @@ const login = asyncHandler(async(req, res) => {
         return res.status(400).json({ message: 'Email et mot de passe requis.' })
     }
 
-    const foundUser = await User.findOne({ email }).exec()
+    const foundUser = await User.findOne({ email }).populate('books.id').exec()
     if(!foundUser || !foundUser.active) {
         return res.status(401).json({ message: 'Email ou mot de passe incorrect.' })
     }
+    
     const username = foundUser.username
     const roles = foundUser.roles
+    const id = foundUser._id
+    const books = foundUser.books
 
     const match = await bcrypt.compare(password, foundUser.password)
     if(!match) {
@@ -29,17 +32,19 @@ const login = asyncHandler(async(req, res) => {
         {
             "UserInfo" : {
                 "username": foundUser.username,
-                "roles": foundUser.roles
+                "roles": foundUser.roles,
+                "id": foundUser.id,
+                "books": foundUser.books
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '10s' }
     );
 
     const refreshToken = jwt.sign(
         { "username": foundUser.username },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '7d' }
     );
 
     // Create secure cookie with refresh token
@@ -50,8 +55,8 @@ const login = asyncHandler(async(req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000 // cookie expiry : set to match refresh token
     });
 
-    // Send accesToken containing username and roles
-    res.json({ accessToken, username, roles })
+    // Send accesToken containing username and ...
+    res.json({ accessToken, username, roles, id, books })
 
 });
 
@@ -65,6 +70,7 @@ const refresh = (req, res) => {
     }
 
     const refreshToken = cookies.jwt
+    
     jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
@@ -73,25 +79,30 @@ const refresh = (req, res) => {
             
             const foundUser = await User.findOne({ username: decoded.username })
             if(!foundUser) return res.status(401).json({ message: 'Veuillez vous connecter pour accéder à cette page.' })
+            const username = foundUser.username
+            const roles = foundUser.roles
+            const id = foundUser._id
+            const books = foundUser.books
 
             const accessToken = jwt.sign(
                 {
                     "UserInfo" : {
                         "username": foundUser.username,
-                        "roles": foundUser.roles
+                        "roles": foundUser.roles,
+                        "id": foundUser.id,
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10m' }
+                { expiresIn: '10s' }
             );
 
-            res.json({ accessToken });
+            res.json({ accessToken, id, username, roles });
         })
     )
 };
 
 // @desc Logout
-// @route POST /auth/logout
+// @route GET /auth/logout
 // @access Public
 const logout = (req, res) => {
     const cookies = req.cookies

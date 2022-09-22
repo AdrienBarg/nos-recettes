@@ -13,8 +13,14 @@ const getAllUsers = asyncHandler(async (req, res) => {
     if(!users?.length) {
         return res.status(400).json({ message: 'No users found'})
     }
+    console.log(req.cookies.jwt)
     res.json(users)
 });
+
+// @desc - Get user by ID
+// @route - GET /users/myInfo
+// @route - Public
+
 
 // @desc - Create new user
 // @route - POST /users
@@ -55,32 +61,42 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @route - PATCH /users
 // @access - Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, username, email, password, active, roles } = req.body
+    const { id, username, email, password, active, roles, books, recipes } = req.body
 
     // Confirm data
-    if (!id || !username || !email || typeof active !== 'boolean') {
-        return res.status(400).json({ message : 'All fields are required.' })
+    if (!id) {
+        return res.status(400).json({ message : 'ID is required.' })
     }
-
     const user = await User.findById(id).exec();
     if(!user) {
         return res.status(400).json({ message: 'User not found' })
     }
 
     // Check for duplicate
-    const duplicateName = await User.findOne({ 'username': {'$regex': username, '$options': 'i'} }).lean().exec();
-    const duplicateEmail = await User.findOne({ email }).lean().exec();
+    if (username) {
+        const duplicateName = await User.findOne({ 'username': {'$regex': username, '$options': 'i'} }).lean().exec();
+        if(duplicateName && duplicateName?._id.toString() !== id) {
+            return res.status(409).json({ message: 'Duplicate username' })
+        } else {
+            user.username = username;
+        }
+    }
+    if (email) {
+        const duplicateEmail = await User.findOne({ email }).lean().exec();
+        if(duplicateEmail && duplicateEmail?._id.toString() !== id) {
+            return res.status(409).json({ message: 'Duplicate email' })
+        } else {
+            user.email = email;
+        }
+    }
         //allow updates to the original user
-    if(duplicateName && duplicateName?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate username' })
-    }
-    if(duplicateEmail && duplicateEmail?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate email' })
-    }
+
+
     
-    user.username = username;
-    user.email = email;
-    user.active = active;
+    //user.username = username;
+    //user.email = email;
+    if(books) { user.books.push(books) }
+    if(typeof active === 'boolean') { user.active = active }
     if(roles) { user.roles = roles }
     if(password) {
         // Hash password

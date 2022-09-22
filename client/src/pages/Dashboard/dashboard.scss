@@ -1,17 +1,157 @@
 .dashMain {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
+    height: 90vh;
+    width: 100vw;
+    max-width: 100%;
+    position: relative;
     
     .contentWrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        //justify-content: center;
         align-items: center;
-        width: 1400px;
-        background-color: var(--dimWhite);
+        width: 80%;
+        min-height: 100vh;
+        background-color: rgba(white, 1);
+        
+
+        .dashHeader {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            padding: 10px;
+            //border: 1px solid rgba(var(--primary-color-rgb), 0.5);
+            //border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.5);
+            //border-radius: 5px;
+            //border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.5);
+                h2 {
+                    margin: 0;
+                    text-align: center;
+                }
+
+                p {
+                    text-align: center;
+                }
+        }
+
+        .dashBody {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+
+            article {
+                margin: 0 5vw;
+            }
+            
+            .booksContainer {
+                display: flex;
+                justify-content: start;
+                flex-wrap: wrap;
+                gap: 5vw;
+                margin: 1vw 3vw;
+                
+
+                .bookWrapper {
+                    width: 8vw;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: var(--quaternary-color);
+                    color: var(--secondary-color);
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    .picture {
+                        width: 100px;
+                        height: 100px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        //border: 1px solid black;
+                        
+                        img {
+                            width: 60%;
+                        }
+                    }
+                    p {
+                        max-width: fit-content;
+                        text-align: center;
+                    }
+                }
+            }
+        }
     }
 
-    
+    .nav {
+        margin-top: 25px;
+        position: relative;
+        width: 640px;
+        height: 50px;
+        background-color: var(--quaternary-color);
+        border-radius: 8px;
+        font-size: 0;
+
+        a {
+            line-height: 50px;
+            height: 100%;
+            font-size: 15px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            vertical-align: top;
+
+            &:nth-child(1) {
+                width: 140px;
+            }
+            &:nth-child(2) {
+                width: 160px;
+            }
+            &:nth-child(3) {
+                width: 160px;
+            }
+            &:nth-child(4) {
+                width: 180px;
+            }
+        }
+        #animation {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            z-index: 0;
+            transition: all .5s ease 0s;
+            border-radius: 8px;
+        }
+        .start-myBooks, a:nth-child(1):hover~#animation {
+            width: 140px;
+            left: 0;
+            background-color: var(--primary-color);
+        }
+        .start-myRecipes, a:nth-child(2):hover~#animation {
+            width: 160px;
+            left: 140px;
+            background-color: #df8434;
+        }
+        .start-bookmarks, a:nth-child(3):hover~#animation {
+            width: 160px;
+            left: 300px;
+            background-color: var(--tertiary-color);
+        }
+        .start-settings, a:nth-child(4):hover~#animation {
+            width: 180px;
+            left: 460px;
+            background-color: #3498db;
+        }
+    }
 }

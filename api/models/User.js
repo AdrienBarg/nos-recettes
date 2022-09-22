@@ -28,8 +28,11 @@ const userSchema = new mongoose.Schema({
         _id: false
     },
     books: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Book'
+        id : {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Book'
+        },
+        _id: false
     }],
     active: {
         type: Boolean,

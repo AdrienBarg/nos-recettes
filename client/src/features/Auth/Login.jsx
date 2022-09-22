@@ -36,15 +36,18 @@ const Login = () => {
           withCredentials: true
         }
       );
-      const accessToken = response?.data?.accessToken;
-      const username = response?.data?.username;
       console.log('data : ' + JSON.stringify(response.data))
-      const roles = response?.data?.roles;
+      const accessToken = response?.data?.accessToken
+      const username = response?.data?.username
+      const id = response?.data?.id
+      const roles = response?.data?.roles
+      const books = response?.data?.books
+      const recipes = 
       //setAuth({ user, email, pwd, roles, accessToken })
-      setAuth({ username, email, roles, accessToken });
+      setAuth({ id, username, email, roles, books, accessToken });
+      console.log(id)
       setEmail('');
       setPwd('');
-      console.log(from)
       navigate(from, {replace: true})
 
     } catch (err) {

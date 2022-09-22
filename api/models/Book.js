@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
     author: {
-        type: [{
+        type: {
             id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
@@ -10,7 +10,7 @@ const bookSchema = new mongoose.Schema({
             name: {
                 type: String
             }
-        }],
+        },
         required: true,
         _id: false
     },

@@ -5,14 +5,24 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import useAuth from "../../hooks/useAuth";
+import useLogout from '../../hooks/useLogout';
 
 const Navbar = () =>  {
 
-    const auth = useAuth()
-    let user = auth.auth
+    const { auth } = useAuth()
+    let user = auth
+    console.log(user)
+    const logout = useLogout()
+    
+    const signOut = async () => {
+        await logout()
+    }
 
     return (
-        <nav className="mainNav">
+        <nav className="navMain">
+            <div className="navWrapper">
+
+            
             <div className="logoWrapper">
                 <Link to = "/" >
                     <img src={logoChef} alt="logo" />
@@ -31,15 +41,15 @@ const Navbar = () =>  {
                             Comment ça marche ?
                         </li>
                     </Link>
-                    {user 
+                    {user?.id 
                     ? <>
                         <Link to = "/dashboard">
                             <li className="auth">
                                 Ma cuisine
                             </li>
                         </Link>
-                        <Link to ="/logout">
-                            <li className="logout">
+                        <Link to ="/">
+                            <li className="logout" onClick={signOut}>
                                 <FontAwesomeIcon icon={faRightFromBracket} />
                             </li>
                         </Link>
@@ -58,6 +68,7 @@ const Navbar = () =>  {
                       </>
                     }
                 </ul>
+            </div>
             </div>
         </nav>
     )

@@ -8,6 +8,7 @@ const verifyJWT = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1] // split then take what is after space ' '
+    //console.log(token);
 
     jwt.verify(
         token,

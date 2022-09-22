@@ -1,14 +1,38 @@
-.mainNav {
-    height: 10%;
+.navMain {
+    height: 10vh;
+    width: 100vw;
+    max-width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    //background-color: #d33c3c;
+    justify-content: center;
     color: var(--primary-color);
-    -webkit-box-shadow:inset 0px 1px 0px 0px var(--primary-color);
-    -moz-box-shadow:inset 0px 1px 0px 0px var(--primary-color);
-    box-shadow:inset 0px 1px 0px 0px var(--primary-color);
+    position: relative;
+    z-index: 10;
+    /*background-color: rgba(black, 0.5);
+    background: var(--background-image);
+    background-position: 0 -13.5vh;
+    background-repeat: no-repeat;*/
+
+    // border top for nav without messing padding
+        -webkit-box-shadow:inset 0px 1px 0px 0px var(--primary-color);
+        -moz-box-shadow:inset 0px 1px 0px 0px var(--primary-color);
+        box-shadow:inset 0px 1px 0px 0px var(--primary-color);
+    
+    .navWrapper {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        // border top for nav without messing padding
+        /*-webkit-box-shadow:inset 0px 2px 0px 0px var(--primary-color);
+        -moz-box-shadow:inset 0px 2px 0px 0px var(--primary-color);
+        box-shadow:inset 0px 2px 0px 0px var(--primary-color);*/
+        border-top: 5px solid var(--primary-color);
+        box-shadow: 5px -10px 20px 0px black;
+    }
+    
 
     .logoWrapper {
         margin-left: 10%;

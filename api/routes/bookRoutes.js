@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const bookController = require('../controllers/bookController')
+const verifyJWT = require('../middleware/verifyJWT')
 
 router.route('/myBooks')
-    .get(bookController.getMyBooks)
+    .get(verifyJWT, bookController.getMyBooks)
 
 router.route('/')
     .get(bookController.getAllBooks)

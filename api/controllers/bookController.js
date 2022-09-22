@@ -1,19 +1,19 @@
-const expressAsyncHandler = require('express-async-handler');
 const asyncHandler = require('express-async-handler');
 const Book = require('../models/Book');
 
 // @desc - Get books for ID
 // @route - GET /books/myBooks
 // @access - Public
-const getMyBooks = expressAsyncHandler(async (req, res) => {
-    const { author } = req.body
-    console.log(req.body)
+const getMyBooks = asyncHandler(async (req, res) => {
+
+    const author = req.query.id
+    
     // Confirm data
-    if (!author?.id) {
+    if (!author) {
         return res.status(400).json({ message: 'No ID.' })
     }
 
-    let books = await Book.find({ 'author.id': author.id }).lean()
+    let books = await Book.find({ 'author.id': author }).lean()
     if (!books?.length) {
         console.log(books)
         books = []
@@ -40,13 +40,13 @@ const createNewBook = asyncHandler(async (req, res) =>  {
     
     // Confirm data
     if (!title || !author) {
-        return res.status(400).json({ message: 'Title and creator required.' })
+        return res.status(400).json({ message: 'Title and author required.' })
     }
     const editors = author
 
     // Check for duplicate by same author
-    const duplicateName = await Book.findOne({ 'name' : { '$regex': title, '$options': 'i'}, 'author' : author }).lean().exec()
-    if(duplicateName) {
+    const duplicateTitle = await Book.findOne({ 'title' : { '$regex': title, '$options': 'i'}, 'author.id': author.id }).lean().exec()
+    if(duplicateTitle) {
         return res.status(409).json({ message: `Vous avez déjà créé un livre du nom de  '${title}'.` })
     }
     

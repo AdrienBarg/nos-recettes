@@ -6,9 +6,10 @@ import { logo } from '../../assets';
 import { Register, Login }  from '../../features/Auth';
 import Navbar from '../../components/Navbar/Navbar';
 import Unauthorized from '../../components/Unauthorized/Unauthorized';
+import useRefreshToken from '../../hooks/useRefreshToken';
 
 const Home = () => {
-
+  const refresh = useRefreshToken()
   const [context, setContext] = useState('');
 
     let {modale} = useParams();
@@ -26,10 +27,9 @@ const Home = () => {
     }, [modale])
 
   return (
-    <div className="mainHome">
-
-      <div className="mainHero">
-        <Navbar />
+    <>
+      <Navbar />
+      <section className="homeMain">
         <div className="contentWrapper">
           <div>
             {context === 'login' ? (
@@ -42,6 +42,9 @@ const Home = () => {
               <div className='logoContainer'>
                 <img src={logo} alt="" />
                 <h1>Nos-recettes.fr</h1>
+                <button onClick={() => refresh()} >
+                  Refresh
+                </button>
               </div>
             )}
           </div>
@@ -60,9 +63,8 @@ const Home = () => {
             </Link>
           </div>
         </div>
-      </div>
-
-    </div>
+      </section>
+    </>
   )
 }
 

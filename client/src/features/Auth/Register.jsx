@@ -81,7 +81,10 @@ const Register = () => {
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 409) {
-                setErrMsg(err.response.message || 'Ce compte existe déjà.')
+                setErrMsg(err.response.data.message || 'Ce compte existe déjà.')
+                err?.response?.data?.message.includes('pseudo')
+                    ? setValidUsername(false)
+                    : setValidEmail(false)
             } else {
                 setErrMsg('Une erreur est survenue lors de l\'inscription')
             }
@@ -101,7 +104,7 @@ const Register = () => {
         ) : (
             <>
             <h2>S'inscrire</h2>
-            <p>{errMsg}</p>
+            {/*<p>{errMsg}</p>*/}
             <form onSubmit={handleSubmit}>
                 {/* Username field */}
                 <label htmlFor="username" >
