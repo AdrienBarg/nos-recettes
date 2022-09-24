@@ -34,15 +34,14 @@ const login = asyncHandler(async(req, res) => {
                 "username": foundUser.username,
                 "roles": foundUser.roles,
                 "id": foundUser.id,
-                "books": foundUser.books
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '10s' }
+        { expiresIn: '1d' }
     );
 
     const refreshToken = jwt.sign(
-        { "username": foundUser.username },
+        { "username": foundUser.username, "id": foundUser.id },
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '7d' }
     );
@@ -55,7 +54,7 @@ const login = asyncHandler(async(req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000 // cookie expiry : set to match refresh token
     });
 
-    // Send accesToken containing username and ...
+    // Send accesToken + username and ...
     res.json({ accessToken, username, roles, id, books })
 
 });
@@ -93,7 +92,7 @@ const refresh = (req, res) => {
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10s' }
+                { expiresIn: '1d' }
             );
 
             res.json({ accessToken, id, username, roles });

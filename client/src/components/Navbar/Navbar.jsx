@@ -11,7 +11,6 @@ const Navbar = () =>  {
 
     const { auth } = useAuth()
     let user = auth
-    console.log(user)
     const logout = useLogout()
     
     const signOut = async () => {

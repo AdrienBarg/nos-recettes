@@ -31,6 +31,8 @@ app.use('/measures', require('./routes/measureRoutes'))
 app.use('/category', require('./routes/categoryRoutes'))
 app.use('/roles', require('./routes/roleRoutes'))
 app.use('/books', require('./routes/bookRoutes'))
+app.use('/dashboard', require('./routes/dashboardRoutes'))
+app.use('/following', require('./routes/followingRoutes'))
 
 /*app.all('*', (req, res) => {
     res.status(404)

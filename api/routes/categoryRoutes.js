@@ -4,7 +4,7 @@ const categoryController = require('../controllers/categoryController')
 const verifyAdminJWT = require('../middleware/verifyAdminJWT')
 
 router.route('/')
-    .get(verifyAdminJWT, categoryController.getAllCategories)
+    .get(categoryController.getAllCategories)
     .post(verifyAdminJWT, categoryController.createNewCategory)
     .patch(verifyAdminJWT, categoryController.updateCategory)
     .delete(verifyAdminJWT, categoryController.deleteCategory)

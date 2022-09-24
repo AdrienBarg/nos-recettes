@@ -1,0 +1,57 @@
+.bookWrapper {
+    justify-self: center;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--quaternary-color);
+    color: var(--secondary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px 0px black;
+    
+
+    &:hover {
+        color: var(--secondary-color);
+        background-color: var(--tertiary-color);
+        margin-top:-5px;
+    }
+
+    &.create {
+        color: var(--secondary-color);
+        background-color: var(--tertiary-color);
+
+        .picture {
+            filter: var(--secondary-filter)
+        }
+
+    }
+
+    .picture {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //box-shadow: 2.5px 10px 20px 0px;
+        filter: var(--secondary-filter);
+        img {
+            width: 60%;
+        }
+    }
+    p {
+        width: 80%;
+        min-height: 25%;
+        text-align: center;
+    }
+
+    .author {
+        color: var(--tertiary-color);
+        font-weight: 600;
+    }
+}
+
+.bookmarks {
+    justify-content: space-between;
+}

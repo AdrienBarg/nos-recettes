@@ -34,6 +34,13 @@ const userSchema = new mongoose.Schema({
         },
         _id: false
     }],
+    recipes: [{
+        id : {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Recipe'
+        },
+        _id: false
+    }],
     active: {
         type: Boolean,
         default: true

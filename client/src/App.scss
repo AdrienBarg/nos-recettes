@@ -3,6 +3,8 @@
 
 :root {
     font-family: Poppins, Verdana, Tahoma, sans-serif;
+    --primary-font: Poppins, Verdana, Tahoma, sans-serif;
+    --secondary-font: Raleway, Verdana, Tahoma, sans-serif;
     //background: url('./assets/heroBg.jpg');
     //opacity: 0.95;
     //overflow-y:scroll;
@@ -20,6 +22,7 @@
     --tertiary-filter: invert(30%) sepia(87%) saturate(1412%) hue-rotate(153deg) brightness(96%) contrast(104%);
     
     --quaternary-color: #013747;
+    --quaternary-filter: invert(11%) sepia(61%) saturate(2915%) hue-rotate(173deg) brightness(97%) contrast(99%);
 
     --white-filter: invert(100%);
     --dimWhite: #e2e2e2;
@@ -58,4 +61,8 @@ a {
 
 li {
     list-style: none;
+}
+
+h2 {
+    font-size: 1.4rem;
 }

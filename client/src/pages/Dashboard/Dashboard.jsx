@@ -11,72 +11,52 @@ import { useState, useEffect } from 'react';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 import Navbar from '../../components/Navbar/Navbar';
+import Card from '../../components/Card/Card';
+import { Bookmarks } from '../../components/Dashboard';
 
 
 const Dashboard = () => {
 
   const axiosPrivate = useAxiosPrivate()
 
-  const auth = useAuth()
-  const username = auth.auth.username
-  const author = auth.auth.id
+  const { auth } = useAuth()
+  const username = auth.username
+  const userID = auth.id
 
   const [content, setContent] = useState('myBooks')
   const [myBooks, setMyBooks] = useState([])
   const [myRecipes, setMyRecipes] = useState([])
+  const [bookmarks, setBookmarks] = useState([])
 
-
-  useEffect(() => {
+  useEffect( () => {
     let isMounted = true
     const controller = new AbortController()
 
-    const getMyBooks = async () => {
+    const getMyCollection = async () => {
       try {
         const response = await axiosPrivate.get(
-          '/books/myBooks',
-           {signal: controller.signal,
-            params: { 
-              id: author
+          '/dashboard/',
+          {signal: controller.signal,
+            params: {
+              id: userID
             }
           }
         )
-        isMounted && setMyBooks(response.data)
+        const books = response.data.collection?.books
+        const recipes = response.data.collection?.recipes
+        if(isMounted) {
+          setMyBooks(books)
+          setMyRecipes(recipes)
+        }
       } catch (err) {
         console.log(err)
-        // navigate back to here after login - TODO
       }
-      /*const books = await axiosPrivate.get(
-        '/books/myBooks',
-        {
-          params: {
-            id: author
-          }
-        }
-      )
-      setMyBooks(books.data)*/
-    }
-    getMyBooks()
-    return () => {
-      isMounted = false
-      controller.abort()
+      return () => {
+        isMounted = false
+        controller.abort()
+      };
     };
-    
-    /*const getMyRecipes = async () => {
-      const recipes = await axios.get(
-        '/recipes/myRecipes',
-        {
-          params: {
-            id: author
-          }
-        }
-      )
-      setMyRecipes(recipes.data)
-    }
-    getMyRecipes()
-
-    const getBookmarks = async () => {
-      
-    }*/
+    getMyCollection()
   }, [])
 
 
@@ -109,35 +89,24 @@ const Dashboard = () => {
           <div className="dashBody">
             {content === 'myBooks' &&
               <article>
-                <div>
-                  <h2> Mes livres</h2>
-                </div>
                 <div className="booksContainer">
 
-                  <div className="bookWrapper">
+                  <div className="bookWrapper create">
                     <div className="picture">
                       <img src={logoPlus} alt="" />
                     </div>
                     <p>Créer un nouveau livre</p>
                   </div>
-                  {myBooks.map((book, index) => (
-                    <div className="bookWrapper" key={index}>
-                      <div className='picture'>
 
-                      </div>
-                      <p>{book.title} </p>
-                    </div>
+                  {myBooks.map((book, index) => (
+                    <Card item={book} index={index} key={index} />
                   ))}
+
                 </div>
               </article>
             }
             {content === "bookmarks" &&
-              <article>
-                <h2> Mes favoris</h2>
-                <div className='bookWrapper'>
-                  hello
-                </div>
-              </article>
+              <Bookmarks />
             }
             {content === 'settings' &&
               <>

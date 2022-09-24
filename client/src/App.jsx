@@ -23,21 +23,19 @@ function App() {
   return (
       <Routes>
         <Route path="/" element={ <Layout /> }>
-
-          {/* Public routes */}
+          <Route element={<PersistLogin />}>
+            
+            {/* Public routes */}
             <Route index element={ <Home/> } />
             <Route path="home" element={ <Home/> } />
             <Route path="home/:modale" element={ <Home /> } />
-            {/*<Route path="logout" element={ <Logout />} />*/}
-            { /*<Route path="unauthorized" element={ <Unauthorized /> } />*/}
 
-          {/*Member routes*/}
-          <Route element={<PersistLogin />}>
+            {/*Member routes*/}
             <Route element={<RequireAuth allowedRoles={[ROLES.Member]} />}>
               <Route path="dashboard" element={ <Dashboard /> } />
             </Route>
+          
           </Route>  
-
         </Route>
       </Routes>
   )

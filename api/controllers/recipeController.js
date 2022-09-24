@@ -1,24 +1,24 @@
 const asyncHandler = require('express-async-handler');
 const Book = require('../models/Book');
 
-// @desc - Get books for my ID
+// @desc - Get my recipes
 // @route - GET /books/myBooks
 // @access - Public
 const getMyBooks = asyncHandler(async (req, res) => {
 
-    const author = req.query.id
+    const id = req.query.id
     
     // Confirm data
-    if (!author) {
+    if (!id) {
         return res.status(400).json({ message: 'No ID.' })
     }
 
-    let books = await Book.find({ 'author.id': author }).lean()
-    if (!books?.length) {
-        console.log(books)
-        books = []
+    const recipes = await Book.find({ 'author.id': author }).lean()
+    if (!recipes?.length) {
+        console.log(recipes)
+        recipes = []
     }
-    res.json(books)
+    res.json(recipes)
 });
 
 // @desc - Get all books

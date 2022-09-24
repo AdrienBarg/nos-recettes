@@ -6,10 +6,8 @@ import { logo } from '../../assets';
 import { Register, Login }  from '../../features/Auth';
 import Navbar from '../../components/Navbar/Navbar';
 import Unauthorized from '../../components/Unauthorized/Unauthorized';
-import useRefreshToken from '../../hooks/useRefreshToken';
 
 const Home = () => {
-  const refresh = useRefreshToken()
   const [context, setContext] = useState('');
 
     let {modale} = useParams();
@@ -42,9 +40,6 @@ const Home = () => {
               <div className='logoContainer'>
                 <img src={logo} alt="" />
                 <h1>Nos-recettes.fr</h1>
-                <button onClick={() => refresh()} >
-                  Refresh
-                </button>
               </div>
             )}
           </div>

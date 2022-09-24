@@ -3,11 +3,13 @@ import heroPic1 from './heroPic1.jpg';
 import heroPic2 from './heroPic2.jpg';
 import heroBg from './heroBg.jpg';
 import logoPlus from './logoPlus.png';
+import smallChef from './smallChef.svg'
 
 export {
     logo,
     heroPic1,
     heroPic2,
     heroBg,
-    logoPlus
+    logoPlus,
+    smallChef
 }

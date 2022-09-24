@@ -11,7 +11,6 @@
     .contentWrapper {
         display: flex;
         flex-direction: column;
-        //justify-content: center;
         align-items: center;
         width: 80%;
         min-height: 100vh;
@@ -26,65 +25,27 @@
             justify-content: center;
             margin-top: 50px;
             padding: 10px;
-            //border: 1px solid rgba(var(--primary-color-rgb), 0.5);
-            //border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.5);
-            //border-radius: 5px;
-            //border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.5);
-                h2 {
-                    margin: 0;
-                    text-align: center;
-                }
-
-                p {
-                    text-align: center;
-                }
+            h2 {
+                margin: 0;
+                text-align: center;
+            }
+            p {
+                text-align: center;
+            }
         }
 
         .dashBody {
             display: flex;
             flex-direction: column;
-            width: 90%;
-
+            width: 80%;
             article {
-                margin: 0 5vw;
+                margin: 5% 5vw;
             }
-            
             .booksContainer {
-                display: flex;
-                justify-content: start;
-                flex-wrap: wrap;
-                gap: 5vw;
-                margin: 1vw 3vw;
-                
-
-                .bookWrapper {
-                    width: 8vw;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: var(--quaternary-color);
-                    color: var(--secondary-color);
-                    border-radius: 4px;
-                    cursor: pointer;
-
-                    .picture {
-                        width: 100px;
-                        height: 100px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        //border: 1px solid black;
-                        
-                        img {
-                            width: 60%;
-                        }
-                    }
-                    p {
-                        max-width: fit-content;
-                        text-align: center;
-                    }
-                }
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
+                justify-content: center;
+                grid-gap: 25px;
             }
         }
     }
@@ -97,7 +58,6 @@
         background-color: var(--quaternary-color);
         border-radius: 8px;
         font-size: 0;
-
         a {
             line-height: 50px;
             height: 100%;

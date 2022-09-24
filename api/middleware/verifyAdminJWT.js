@@ -20,7 +20,7 @@ const verifyAdminJWT = (req, res, next) => {
             if (req.roles.some(e => e.role === process.env.ADMIN_ROLE)) {
                 next()
             } else {
-                return res.status(403).json({ message: 'Accès refusé.' })
+                return res.status(403).json({ message: 'Accès refusé. VOus n\'avez pas les droits nécessaires.' })
             }
         }
     )
